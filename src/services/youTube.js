@@ -1,7 +1,7 @@
 angular.module('video-player')
 .service('youTube', function($http) {
   
-  this.getVideos = function(searchInput, context) {
+  this.result = function(searchInput, cb) {
     return $http({
       url: 'https://www.googleapis.com/youtube/v3/search',
       method: 'GET',
@@ -17,8 +17,7 @@ angular.module('video-player')
       if (data.data.items.length === 0) {
         console.log(data);
       }
-      context.videos = data.data.items;
-      context.currentVideo = context.videos[0];
+      cb(data);
     });
   };
 });
